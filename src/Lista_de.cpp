@@ -94,7 +94,7 @@ T Lista_de<T>::baja(size_t indice) {
     if(indice >= cantidad_datos){
         throw Lista_exception();
     }
-    else if (indice == -1 || indice == cantidad_datos - 1 || indice == 1){
+    else if (indice == -1 || indice == cantidad_datos - 1){
         dato_a_devolver = baja();
     }
     else{
@@ -102,10 +102,14 @@ T Lista_de<T>::baja(size_t indice) {
         dato_a_devolver = nodo_a_eliminar->obtener_dato();
         Nodo_de<T> * nodo_anterior = nodo_a_eliminar->obtener_anterior();
         Nodo_de<T> * nodo_siguiente = nodo_a_eliminar->obtener_siguiente();
+        nodo_siguiente->cambiar_anterior(nodo_anterior);
         if(indice == 0){
             primer_nodo = nodo_siguiente;
         }
-        delete nodo_a_eliminar;
+        else{
+            nodo_anterior->cambiar_siguiente(nodo_siguiente);
+        }
+        //delete nodo_a_eliminar;
         cantidad_datos--;
     }
     return dato_a_devolver;
