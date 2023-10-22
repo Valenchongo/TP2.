@@ -15,8 +15,8 @@ private:
 
     Lista_de<Item*> lista;
 
-    // Pre: Se le debe pasar string "nombre-item" por parametro.
-    // Post: Mediante el nombre que se le pasa por parametro, busca el primer item con ese nombre dentro del inventario y devuelve la posicion del mismo.
+    // Pre:El nombre pasado por parametro debe estar en el inventario.
+    // Post: Busca el indice del item pasado por parametro.
     size_t buscar_indice_item(string nombre_item);
 
     // Pre: Se le debe pasar un string con formato "nombre,tipo".
@@ -32,11 +32,11 @@ public:
     Inventario();
 
     // Pre: Se le debe pasar por parametro un item valido.
-    // Post: Se encarga de agregar al vector el item pasado por parametro solo si la cantidad de items es menor a CANTIDAD_MAXIMA_DE_ITEMS.
+    // Post: Se encarga de agregar al vector el item pasado por parametro.
     void alta(Item* item);
 
-    // Pre: Se le debe pasar el nombre de un item.
-    // Post: si el nombre del item esta dentro del inventario lo elimina del mismo, de no ser asi avisa por consola que el item no esta dentro del inventario.
+    // Pre: Se le debe pasar el nombre de un item existente.
+    // Post: Elimina el primer item con el nombre pasado por parametro.
     void baja(string nombre_item);
 
     // Pre:
@@ -48,7 +48,7 @@ public:
     void escribir_archivo();
 
     //Pre:
-    //Post: Mediante un archivo csv, itera todos los items del mismo guardandolos en un inventario.
+    //Post: Mediante un archivo csv, carga todos los items en la lista del inventario.
     void cargar_archivo();
 
     void tamaño();

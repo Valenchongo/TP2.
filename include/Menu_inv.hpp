@@ -21,11 +21,7 @@ private:
 
     // Pre: El inventario debe estar instanciado.
     // Post: Verifica que el item tenga un tipo valido, de ser asi el inventario le dara alta al mismo.
-    static void verificar_item_correcto(Inventario &inventario, string nombre, string tipo);
-public:
-    // Pre:
-    // Post: Evalua las acciones introducidas por el usuario, dependiendo de las mismas va a usar distintos metodos del inventario.
-    static void ejecutar_inventario();
+    static bool verificar_item_correcto(string tipo);
 
     // Pre: El inventario debe estar instanciado.
     // Post: Le pide al usuario que introduzca el nombre y el tipo del Item que quiere agregar al inventario.
@@ -34,6 +30,12 @@ public:
     // Pre:
     // Post: Le pide al usuario que ingrese el nombre del item que desea eliminar del inventario.
     static string introducir_item_para_baja();
+public:
+    // Pre:
+    // Post: Evalua las acciones introducidas por el usuario, dependiendo de las mismas va a usar distintos metodos del inventario.
+    static void ejecutar_inventario();
+
+
 
 };
 
