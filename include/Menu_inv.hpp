@@ -20,7 +20,7 @@ private:
     static string preguntar_accion();
 
     // Pre: El inventario debe estar instanciado.
-    // Post: Verifica que el item tenga un tipo valido, de ser asi el inventario le dara alta al mismo.
+    // Post: Verifica que el item tenga un tipo valido.
     static bool verificar_item_correcto(string tipo);
 
     // Pre: El inventario debe estar instanciado.

@@ -12,6 +12,7 @@ class Inventario {
 private:
     const size_t CANTIDAD_MAXIMA_DE_ITEMS = 15;
     const size_t VALOR_FUERA_DEL_INVENTARIO = 16;
+    const string ruta_archivo = "items.csv";
 
     Lista_de<Item*> lista;
 
