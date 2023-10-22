@@ -13,7 +13,7 @@
 
 using namespace std;
 
-class Menu {
+class Menu_inv {
 private:
     // Pre:
     // Post: Se encarga de preguntarle al usuario que accion desea hacer en el inventario.
