@@ -1,5 +1,6 @@
 
 #include "../include/Menu.hpp"
+#include "../src/Menu_inv.cpp"
 #include "../src/Destino.cpp"
 
 void Menu::evaluar_accion() {
@@ -9,7 +10,7 @@ void Menu::evaluar_accion() {
     do{
         accion = preguntar_accion();
         if (accion == "inventario"){
-
+            Menu_inv::ejecutar_inventario();
         }
         else if(accion == "destino"){
             evaluar_acciones_destino(destino);
@@ -32,7 +33,10 @@ void Menu::evaluar_acciones_destino(Destino &destino) {
             destino.agregar_evento(evento);
         }
         else if(accion_destino == "definir_destino"){
+            destino.contar_eventos();
             definir_destino(destino);
+            destino.volver_a_encolar();
+
         }
         else if(accion_destino != "volver"){
             cout<<"no ingreso una accion valida"<<endl;
@@ -64,8 +68,8 @@ Evento Menu::crear_evento() {
 }
 
 void Menu::definir_destino(Destino &destino) {
-    destino.contar_eventos();
-    string estado_del_jugador = destino.analizar_eventos();
+    string estado_del_jugador = destino.analizar_estado_jugador();
+    destino.acomodar_cantidades(estado_del_jugador);
     if(estado_del_jugador == "Asustado"){
         cout<<"Evento Pyramid Head adelantado"<<endl;
     }

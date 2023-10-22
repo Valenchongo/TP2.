@@ -28,23 +28,25 @@ void Menu_inv::ejecutar_inventario() {
 }
 
 void Menu_inv::introducir_item_para_alta(Inventario &inventario) {
+    bool item_correcto = false;
     string nombre;
     string tipo;
-    cout<<"Nombre del item: ";
-    getline(cin,nombre);
-    cout<<"Tipo del item: ";
-    getline(cin,tipo);
-    verificar_item_correcto(inventario,nombre,tipo);
+    do{
+        cout<<"Nombre del item: ";
+        getline(cin,nombre);
+        cout<<"Tipo del item: ";
+        getline(cin,tipo);
+        item_correcto = verificar_item_correcto(tipo);
+        if (!item_correcto){
+            cout<<"el tipo ingresado es incorrecto, intente otra vez."<<endl;
+        }
+    }while(!item_correcto);
+    Item* item = new Item(nombre,tipo);
+    inventario.alta(item);
 }
 
-void Menu_inv::verificar_item_correcto(Inventario &inventario, string nombre, string tipo) {
-    if(tipo == TIPO_MUNICION || tipo == TIPO_CURATIVO || tipo == TIPO_PUZZLE){
-        Item* item = new Item(nombre,tipo);
-        inventario.alta(item);
-    }
-    else{
-        cout<<"el tipo '"<<tipo<<"' no existe..."<<endl;
-    }
+bool Menu_inv::verificar_item_correcto(string tipo) {
+    return(tipo == TIPO_MUNICION || tipo == TIPO_CURATIVO || tipo == TIPO_PUZZLE);
 }
 
 string Menu_inv::introducir_item_para_baja() {

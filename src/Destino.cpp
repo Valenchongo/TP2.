@@ -12,13 +12,11 @@ void Destino::agregar_evento(Evento evento) {
     if (evaluar_evento_valido(evento)){
         cola.alta(evento);
     }
-    else{
-        cout<<"el evento no es correcto."<<endl;
-    }
 }
 
 void Destino::contar_eventos(){
     size_t cantidad_de_eventos = cola.tamanio();
+    igualar_cantidades_a_0();
     for (size_t i = 0; i <cantidad_de_eventos;i++){
         Evento evento = cola.baja();
         if (evento == "guardar"){
@@ -35,9 +33,12 @@ bool Destino::evaluar_evento_valido(Evento evento) {
     if (evento == "guardar" || evento == "mapa"){
         evento_valido = true;
     }
+    else{
+        cout<<"el evento no es correcto."<<endl;
+    }
     return evento_valido;
 }
-string Destino::analizar_eventos() {
+string Destino::analizar_estado_jugador() {
     string estado_del_jugador;
     if (cantidad_guardados >= 8){
         estado_del_jugador = "Asustado";
@@ -54,7 +55,44 @@ string Destino::analizar_eventos() {
     return estado_del_jugador;
 }
 
+void Destino::acomodar_cantidades(std::string estado_del_jugador) {
+    if(estado_del_jugador == "Asustado"){
+        cantidad_guardados -= 8;
+    }
+    else if(estado_del_jugador == "Desorientado"){
+        if(cantidad_guardados != 0){
+            cantidad_mapa -= cantidad_guardados + 1; //sumamos 1 ya que es la cantidad necesaria para q se cumpla la condicion
+        }
+        cantidad_guardados = 0;
+    }
+    else if(estado_del_jugador == "Precavido"){
+        if(cantidad_mapa != 0){
+            cantidad_guardados -= cantidad_mapa + 1;
+        }
+        cantidad_mapa = 0;
+    }
+}
 
+void Destino::volver_a_encolar() {
+    Evento guardar("guardar");
+    Evento mapa("mapa");
+    for (size_t i = 0; i < cantidad_guardados; i++){
+        cola.alta(guardar);
+    }
+    for (size_t i = 0; i < cantidad_mapa; i++){
+        cola.alta(mapa);
+    }
+}
+
+void Destino::mostrar() {
+    cout<<cantidad_guardados<<" guardaros"<<endl;
+    cout<<cantidad_mapa<<" mapa"<<endl;
+}
+
+void Destino::igualar_cantidades_a_0() {
+    cantidad_guardados = 0;
+    cantidad_mapa = 0;
+}
 Destino::~Destino() {
 
 }

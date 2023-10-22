@@ -65,11 +65,13 @@ void Inventario::cargar_archivo() {
     string linea;
     string nombre;
     string tipo;
-    while(getline(archivoInput,linea)){
+    size_t iterador = 0;
+    while(getline(archivoInput,linea) && iterador < CANTIDAD_MAXIMA_DE_ITEMS){
         nombre = extraer_nombre(linea);
         tipo = extraer_tipo(linea);
         Item* item = new Item(nombre,tipo);
         lista.alta(item);
+        iterador++;
     }
     archivoInput.close();
 }
