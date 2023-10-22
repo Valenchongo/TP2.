@@ -5,7 +5,7 @@
 #include <iostream>
 
 
-void Menu::ejecutar_inventario() {
+void Menu_inv::ejecutar_inventario() {
     Inventario inventario{};
     inventario.cargar_archivo();
     cout<<"si quiere salir del inventario ponga la palabra 'salir'"<<endl;
@@ -27,7 +27,7 @@ void Menu::ejecutar_inventario() {
     inventario.escribir_archivo();
 }
 
-void Menu::introducir_item_para_alta(Inventario &inventario) {
+void Menu_inv::introducir_item_para_alta(Inventario &inventario) {
     string nombre;
     string tipo;
     cout<<"Nombre del item: ";
@@ -37,7 +37,7 @@ void Menu::introducir_item_para_alta(Inventario &inventario) {
     verificar_item_correcto(inventario,nombre,tipo);
 }
 
-void Menu::verificar_item_correcto(Inventario &inventario, string nombre, string tipo) {
+void Menu_inv::verificar_item_correcto(Inventario &inventario, string nombre, string tipo) {
     if(tipo == TIPO_MUNICION || tipo == TIPO_CURATIVO || tipo == TIPO_PUZZLE){
         Item* item = new Item(nombre,tipo);
         inventario.alta(item);
@@ -47,13 +47,13 @@ void Menu::verificar_item_correcto(Inventario &inventario, string nombre, string
     }
 }
 
-string Menu::introducir_item_para_baja() {
+string Menu_inv::introducir_item_para_baja() {
     string nombre;
     cout<<"indique el item a eliminar: ";
     getline(cin,nombre);
     return nombre;
 }
-string Menu::preguntar_accion() {
+string Menu_inv::preguntar_accion() {
     string accion;
     cout<<"Accion sobre el inventario: ";
     getline(cin,accion);
