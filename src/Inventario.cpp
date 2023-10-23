@@ -14,7 +14,7 @@ void Inventario::alta(Item* item) {
         lista.alta(item);
     }
     else{
-        //delete item;
+        delete item;
         cout<<"el inventario esta lleno..."<<endl;
     }
 }
@@ -38,7 +38,7 @@ void Inventario::baja(string nombre_item) {
     if (!lista.vacio()){
         size_t indice = buscar_indice_item(nombre_item);
         if (indice != VALOR_FUERA_DEL_INVENTARIO){
-           // Item *item = lista.baja(indice);
+
           //  delete item;
           lista.baja(indice);
         }
@@ -113,5 +113,7 @@ void Inventario::consulta() {
 }
 
 Inventario::~Inventario() {
-
+for (size_t i = 0; i < lista.tamanio() ;i++){
+    lista.baja();
+}
 }

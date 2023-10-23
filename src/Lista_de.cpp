@@ -23,7 +23,7 @@ void Lista_de<T>::alta(T dato) {
         nuevo_nodo->cambiar_anterior(ultimo_nodo) ;
     }
     ultimo_nodo = nuevo_nodo;
-    delete nuevo_nodo;
+    //delete nuevo_nodo;  haciendo esto tenem,os un problema para acceder a memoria.
     cantidad_datos++;
 }
 
@@ -83,7 +83,7 @@ T Lista_de<T>::baja() {
         dato_a_devolver = ultimo_nodo->obtener_dato();
         Nodo_de<T>* nodo_anterior = obtener_nodo(indice_nodo_anterior);
         nodo_anterior->cambiar_siguiente(nullptr);
-        //delete ultimo_nodo;
+        delete ultimo_nodo;
         ultimo_nodo = nodo_anterior;
     }
     cantidad_datos--;
@@ -198,7 +198,9 @@ bool Lista_de<T>::vacio() {
 template<typename T>
 Lista_de<T>::~Lista_de() {
     for (size_t i = 0; i < cantidad_datos;i++){
-        baja();
+        Nodo_de<T>* nodo_a_eliminar = ultimo_nodo;
+        ultimo_nodo = ultimo_nodo->obtener_anterior();
+        delete nodo_a_eliminar;
     }
 }
 template<typename T>
