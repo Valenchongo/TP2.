@@ -13,8 +13,10 @@ using namespace std;
 class Destino {
 private:
     Cola<Evento> cola;
-    int cantidad_mapa;
-    int cantidad_guardados;
+    size_t cantidad_mapa;
+    size_t cantidad_guardados;
+    int cantidad_g ;
+    int cantidad_m;
 
     //Pre:
     //Post:Evalua si la accion ejecutada en el evento pasado por parametro es correcta.
