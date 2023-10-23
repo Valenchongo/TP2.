@@ -1,4 +1,3 @@
-
 #include "../include/Destino.hpp"
 #include "Cola.cpp"
 Destino::Destino() {
