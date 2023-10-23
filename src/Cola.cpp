@@ -24,8 +24,8 @@ template<typename T>
 T Cola<T>::baja() {
     T dato_a_devolver;
     if(!vacio()){
+        Nodo<T> * nodo_a_eliminar= primer_nodo;
         dato_a_devolver = primer_nodo->obtener_dato();
-        Nodo<T> * aux = primer_nodo;
         if(cantidad_datos == 1){
             primer_nodo = nullptr;
             ultimo_nodo = nullptr;
@@ -33,12 +33,13 @@ T Cola<T>::baja() {
         else{
             primer_nodo = primer_nodo->obtener_siguiente();
         }
-        delete aux;
+        delete nodo_a_eliminar;
         this->cantidad_datos--;
     }
     else{
         throw Cola_exception();
     }
+
     return dato_a_devolver;
 }
 template<typename T>
@@ -76,8 +77,11 @@ bool Cola<T>::vacio() {
 
 template<typename T>
 Cola<T>::~Cola() {
-    for (size_t i = 0; i < cantidad_datos; i++){
-        baja();
+    while (!vacio()) {
+        Nodo<T> *nodo_a_eliminar = primer_nodo;
+        primer_nodo = primer_nodo->obtener_siguiente();
+        delete nodo_a_eliminar;
+        cantidad_datos--;
     }
 }
 

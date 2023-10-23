@@ -67,24 +67,23 @@ void Lista_de<T>::alta(T dato, size_t indice) {
 
 template<typename T>
 T Lista_de<T>::baja() {
-    size_t indice_nodo_anterior = cantidad_datos - 2;
     T dato_a_devolver;
+    Nodo_de<T>* nodo_a_eliminar = ultimo_nodo;
     if (vacio()){
         throw Lista_exception();
     }
     else if (cantidad_datos == 1){
         dato_a_devolver = primer_nodo->obtener_dato();
-        delete primer_nodo;
         primer_nodo = nullptr;
         ultimo_nodo = nullptr;
     }
     else{
         dato_a_devolver = ultimo_nodo->obtener_dato();
-        Nodo_de<T>* nodo_anterior = obtener_nodo(indice_nodo_anterior);
+        Nodo_de<T>* nodo_anterior = ultimo_nodo->obtener_anterior();
         nodo_anterior->cambiar_siguiente(nullptr);
-        delete ultimo_nodo;
         ultimo_nodo = nodo_anterior;
     }
+    delete nodo_a_eliminar;
     cantidad_datos--;
     return dato_a_devolver;
 }
