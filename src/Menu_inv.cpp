@@ -1,6 +1,5 @@
 
 #include "../include/Menu_inv.hpp"
-#include "../include/Inventario.hpp"
 #include <fstream>
 #include <iostream>
 

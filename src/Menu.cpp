@@ -1,8 +1,5 @@
 
 #include "../include/Menu.hpp"
-#include "../src/Menu_inv.cpp"
-#include "../src/Menu_des.cpp"
-#include "../src/Destino.cpp"
 
 void Menu::evaluar_accion() {
     Destino destino;

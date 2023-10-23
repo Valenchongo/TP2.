@@ -1,8 +1,6 @@
 
 #include "../include/Inventario.hpp"
-#include "../src/Item.cpp"
-#include "../src/Lista_de.cpp"
-
+#include "Lista_de.cpp"
 using namespace std;
 Inventario::Inventario() {
 
@@ -16,7 +14,7 @@ void Inventario::alta(Item* item) {
         lista.alta(item);
     }
     else{
-        delete item;
+        //delete item;
         cout<<"el inventario esta lleno..."<<endl;
     }
 }
@@ -40,8 +38,9 @@ void Inventario::baja(string nombre_item) {
     if (!lista.vacio()){
         size_t indice = buscar_indice_item(nombre_item);
         if (indice != VALOR_FUERA_DEL_INVENTARIO){
-            Item *item = lista.baja(indice);
-            delete item;
+           // Item *item = lista.baja(indice);
+          //  delete item;
+          lista.baja(indice);
         }
         else{
             cout<<"error de inventario! no se dispone de ese item"<<endl;
@@ -75,8 +74,8 @@ void Inventario::cargar_archivo() {
             lista.alta(item);
             iterador++;
         }
-        archivoInput.close();
     }
+    archivoInput.close();
 }
 
 string Inventario::extraer_nombre(std::string linea) {
@@ -111,4 +110,8 @@ void Inventario::consulta() {
     else{
         cout<<"el inventario esta vacio."<<endl;
     }
+}
+
+Inventario::~Inventario() {
+
 }

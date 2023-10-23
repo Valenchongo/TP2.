@@ -1,5 +1,5 @@
 #include "../include/Lista_de.hpp"
-#include "../src/Nodo_de.cpp"
+#include "Nodo_de.cpp"
 #include <iostream>
 using namespace std;
 
@@ -23,8 +23,8 @@ void Lista_de<T>::alta(T dato) {
         nuevo_nodo->cambiar_anterior(ultimo_nodo) ;
     }
     ultimo_nodo = nuevo_nodo;
+    delete nuevo_nodo;
     cantidad_datos++;
-
 }
 
 template<typename T>
@@ -76,12 +76,14 @@ T Lista_de<T>::baja() {
         dato_a_devolver = primer_nodo->obtener_dato();
         primer_nodo = nullptr;
         ultimo_nodo = nullptr;
+        //delete ultimo_nodo;
+        //delete primer_nodo;
     }
     else{
         dato_a_devolver = ultimo_nodo->obtener_dato();
         Nodo_de<T>* nodo_anterior = obtener_nodo(indice_nodo_anterior);
         nodo_anterior->cambiar_siguiente(nullptr);
-        delete ultimo_nodo;
+        //delete ultimo_nodo;
         ultimo_nodo = nodo_anterior;
     }
     cantidad_datos--;
@@ -109,7 +111,7 @@ T Lista_de<T>::baja(size_t indice) {
         else{
             nodo_anterior->cambiar_siguiente(nodo_siguiente);
         }
-        //delete nodo_a_eliminar;
+        delete nodo_a_eliminar;
         cantidad_datos--;
     }
     return dato_a_devolver;
@@ -165,7 +167,6 @@ T Lista_de<T>::avanzar(bool siguiente) {
     else{
         throw Lista_exception();
     }
-
     return dato_a_devolver;
 }
 
@@ -196,7 +197,7 @@ bool Lista_de<T>::vacio() {
 
 template<typename T>
 Lista_de<T>::~Lista_de() {
-    for (size_t i = 0; i < cantidad_datos; i++){
+    for (size_t i = 0; i < cantidad_datos;i++){
         baja();
     }
 }

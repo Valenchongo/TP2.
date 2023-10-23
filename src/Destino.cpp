@@ -1,8 +1,6 @@
 
 #include "../include/Destino.hpp"
-#include "../src/Cola.cpp"
-#include "../src/Evento.cpp"
-
+#include "Cola.cpp"
 Destino::Destino() {
     cantidad_mapa = 0;
     cantidad_guardados = 0;
