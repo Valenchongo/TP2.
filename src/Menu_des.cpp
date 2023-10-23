@@ -1,18 +1,15 @@
-//
-// Created by Valentin Valle on 10/22/2023.
-//
 
 #include "../include/Menu_des.hpp"
 
 
-void Menu_des::evaluar_acciones_destino(Destino &destino) {
+void Menu_des::ejecutar_destino(Destino &destino) {
     cout<<"para dejar de realizar acciones sobre Destino ponga la palabra 'volver'"<<endl;
     string accion_destino;
-    Evento g("guardar");
+    /*Evento g("guardar");
     Evento m("mapa");
     for(size_t i = 0; i<8;i++){
         destino.agregar_evento(m);
-    }
+    }*/
     do{
         accion_destino = preguntar_accion_destino();
         if (accion_destino == "agregar_evento"){
@@ -24,7 +21,6 @@ void Menu_des::evaluar_acciones_destino(Destino &destino) {
             definir_destino(destino);
             destino.volver_a_encolar();
             destino.mostrar();
-
         }
         else if(accion_destino != "volver"){
             cout<<"no ingreso una accion valida"<<endl;

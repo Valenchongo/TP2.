@@ -7,8 +7,8 @@ using namespace std;
 template<typename T>
 Lista_de<T>::Lista_de() {
     cantidad_datos = 0;
-    primer_nodo == nullptr;
-    ultimo_nodo == nullptr;
+    primer_nodo = nullptr;
+    ultimo_nodo = nullptr;
     cursor = nullptr;
     indice_cursor = -1;
 }
@@ -94,7 +94,7 @@ T Lista_de<T>::baja(size_t indice) {
     if(indice >= cantidad_datos){
         throw Lista_exception();
     }
-    else if (indice == -1 || indice == cantidad_datos - 1){
+    else if (indice == cantidad_datos - 1){
         dato_a_devolver = baja();
     }
     else{
