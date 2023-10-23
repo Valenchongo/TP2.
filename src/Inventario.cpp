@@ -38,9 +38,9 @@ void Inventario::baja(string nombre_item) {
     if (!lista.vacio()){
         size_t indice = buscar_indice_item(nombre_item);
         if (indice != VALOR_FUERA_DEL_INVENTARIO){
+         Item * item_a_eliminar = lista.baja(indice);
+         delete item_a_eliminar;
 
-          //  delete item;
-          lista.baja(indice);
         }
         else{
             cout<<"error de inventario! no se dispone de ese item"<<endl;

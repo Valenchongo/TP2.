@@ -74,10 +74,9 @@ T Lista_de<T>::baja() {
     }
     else if (cantidad_datos == 1){
         dato_a_devolver = primer_nodo->obtener_dato();
+        delete primer_nodo;
         primer_nodo = nullptr;
         ultimo_nodo = nullptr;
-        //delete ultimo_nodo;
-        //delete primer_nodo;
     }
     else{
         dato_a_devolver = ultimo_nodo->obtener_dato();
