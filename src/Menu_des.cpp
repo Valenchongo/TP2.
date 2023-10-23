@@ -1,39 +1,18 @@
+//
+// Created by Valentin Valle on 10/22/2023.
+//
 
-#include "../include/Menu.hpp"
-#include "../src/Menu_inv.cpp"
-#include "../src/Menu_des.cpp"
-#include "../src/Destino.cpp"
+#include "../include/Menu_des.hpp"
 
-void Menu::evaluar_accion() {
-    Destino destino;
-    cout<<"para salir ingrese la palabra 'Salir'"<<endl;
-    string accion;
-    do{
-        accion = preguntar_accion();
-        if (accion == "inventario"){
-            Menu_inv::ejecutar_inventario();
-        }
-        else if(accion == "destino"){
-            Menu_des::evaluar_acciones_destino(destino);
-        }
-        else if(accion != "salir"){
-            cout<<"no ingreso una accion valida"<<endl;
-        }
 
-    }while(accion != "salir");
-}
-
-string Menu::preguntar_accion() {
-    string accion;
-    cout<<"operar sobre inventario/destino"<<endl;
-    getline(cin,accion);
-    return accion;
-}
-
-/*
-void Menu::evaluar_acciones_destino(Destino &destino) {
+void Menu_des::evaluar_acciones_destino(Destino &destino) {
     cout<<"para dejar de realizar acciones sobre Destino ponga la palabra 'volver'"<<endl;
     string accion_destino;
+    Evento g("guardar");
+    Evento m("mapa");
+    for(size_t i = 0; i<8;i++){
+        destino.agregar_evento(m);
+    }
     do{
         accion_destino = preguntar_accion_destino();
         if (accion_destino == "agregar_evento"){
@@ -44,6 +23,7 @@ void Menu::evaluar_acciones_destino(Destino &destino) {
             destino.contar_eventos();
             definir_destino(destino);
             destino.volver_a_encolar();
+            destino.mostrar();
 
         }
         else if(accion_destino != "volver"){
@@ -53,24 +33,21 @@ void Menu::evaluar_acciones_destino(Destino &destino) {
     }while(accion_destino != "volver");
 }
 
-
-
-
-string Menu::preguntar_accion_destino() {
+string Menu_des::preguntar_accion_destino() {
     string accion;
     cout<<"que accion desea realizar sobre el destino?"<<endl;
     getline(cin,accion);
     return accion;
 }
 
-Evento Menu::crear_evento() {
+Evento Menu_des::crear_evento() {
     string evento_experimentado;
     cout<<"Evento experimientado: "<<endl;
     getline(cin,evento_experimentado);
     return Evento(evento_experimentado);
 }
 
-void Menu::definir_destino(Destino &destino) {
+void Menu_des::definir_destino(Destino &destino) {
     string estado_del_jugador = destino.analizar_estado_jugador();
     destino.acomodar_cantidades(estado_del_jugador);
     if(estado_del_jugador == "Asustado"){
@@ -85,4 +62,4 @@ void Menu::definir_destino(Destino &destino) {
     else if (estado_del_jugador == "No determinado"){
         cout<<"Comportamiento aun no definido"<<endl;
     }
-}*/
+}

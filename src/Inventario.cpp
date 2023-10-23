@@ -16,6 +16,7 @@ void Inventario::alta(Item* item) {
         lista.alta(item);
     }
     else{
+        delete item;
         cout<<"el inventario esta lleno..."<<endl;
     }
 }
@@ -51,7 +52,7 @@ void Inventario::baja(string nombre_item) {
 }
 
 void Inventario::escribir_archivo() {;
-    ofstream archivoOutput("items.csv");
+    ofstream archivoOutput(ruta_archivo);
     for (size_t i = 0; i < lista.tamanio() ; i++ ){
         Item * item_actual = lista.elemento(i);
         archivoOutput << *item_actual <<"\n"; //*vector[i]
@@ -61,19 +62,21 @@ void Inventario::escribir_archivo() {;
 }
 
 void Inventario::cargar_archivo() {
-    ifstream archivoInput("items.csv");
-    string linea;
-    string nombre;
-    string tipo;
-    size_t iterador = 0;
-    while(getline(archivoInput,linea) && iterador < CANTIDAD_MAXIMA_DE_ITEMS){
-        nombre = extraer_nombre(linea);
-        tipo = extraer_tipo(linea);
-        Item* item = new Item(nombre,tipo);
-        lista.alta(item);
-        iterador++;
+    ifstream archivoInput(ruta_archivo);
+    if (archivoInput.is_open()){
+        string linea;
+        string nombre;
+        string tipo;
+        size_t iterador = 0;
+        while(getline(archivoInput,linea) && iterador < CANTIDAD_MAXIMA_DE_ITEMS){
+            nombre = extraer_nombre(linea);
+            tipo = extraer_tipo(linea);
+            Item* item = new Item(nombre,tipo);
+            lista.alta(item);
+            iterador++;
+        }
+        archivoInput.close();
     }
-    archivoInput.close();
 }
 
 string Inventario::extraer_nombre(std::string linea) {
@@ -87,11 +90,11 @@ string Inventario::extraer_nombre(std::string linea) {
 
 string Inventario::extraer_tipo(std::string linea) {
     size_t posicion_de_coma = linea.find(",");
-    string apellido = "";
+    string tipo = "";
     for(size_t i = posicion_de_coma + 1; i < linea.size() ; i++){
-        apellido += linea[i];
+        tipo += linea[i];
     }
-    return apellido;
+    return tipo;
 }
 
 

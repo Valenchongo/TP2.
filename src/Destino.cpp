@@ -6,12 +6,17 @@
 Destino::Destino() {
     cantidad_mapa = 0;
     cantidad_guardados = 0;
+    cantidad_g = 0;
+    cantidad_m = 0 ;
 }
 
 void Destino::agregar_evento(Evento evento) {
     if (evaluar_evento_valido(evento)){
         cola.alta(evento);
     }
+    cout<<cantidad_g<<" cantidad de guardados"<<endl;
+    cout<<cantidad_m<<" cantidad de mapa"<<endl;
+
 }
 
 void Destino::contar_eventos(){
@@ -21,15 +26,25 @@ void Destino::contar_eventos(){
         Evento evento = cola.baja();
         if (evento == "guardar"){
             cantidad_guardados++;
+            cantidad_g++;
         }
         else if (evento == "mapa"){
             cantidad_mapa++;
+            cantidad_m++;
         }
     }
+    //cantidad_mapa = contador_mapa;
+    //cantidad_guardados = contador_guardados;
 }
 
 bool Destino::evaluar_evento_valido(Evento evento) {
     bool evento_valido = false;
+    if (evento == "guardar"){
+        cantidad_g++;
+    }
+    if (evento == "mapa"){
+        cantidad_m++;
+    }
     if (evento == "guardar" || evento == "mapa"){
         evento_valido = true;
     }
@@ -60,17 +75,27 @@ void Destino::acomodar_cantidades(std::string estado_del_jugador) {
         cantidad_guardados -= 8;
     }
     else if(estado_del_jugador == "Desorientado"){
-        if(cantidad_guardados != 0){
-            cantidad_mapa -= cantidad_guardados + 1; //sumamos 1 ya que es la cantidad necesaria para q se cumpla la condicion
+        if (cantidad_guardados != 0){
+            cantidad_mapa = cantidad_mapa - cantidad_guardados;
+            cantidad_mapa--;//de esta forma
+        }
+        else{
+            cantidad_mapa -= 6;
         }
         cantidad_guardados = 0;
     }
     else if(estado_del_jugador == "Precavido"){
-        if(cantidad_mapa != 0){
-            cantidad_guardados -= cantidad_mapa + 1;
+        if (cantidad_mapa != 0){
+            cantidad_guardados = cantidad_guardados- cantidad_mapa;
+            cantidad_guardados--;
+        }
+        else{
+            cantidad_guardados -= 6;
         }
         cantidad_mapa = 0;
     }
+    cantidad_g=cantidad_guardados;
+    cantidad_m = cantidad_mapa;
 }
 
 void Destino::volver_a_encolar() {
@@ -86,12 +111,14 @@ void Destino::volver_a_encolar() {
 
 void Destino::mostrar() {
     cout<<cantidad_guardados<<" guardaros"<<endl;
-    cout<<cantidad_mapa<<" mapa"<<endl;
+    cout<<cantidad_mapa<<" map"<<endl;
 }
 
 void Destino::igualar_cantidades_a_0() {
     cantidad_guardados = 0;
     cantidad_mapa = 0;
+    cantidad_g = 0;
+    cantidad_m = 0;
 }
 Destino::~Destino() {
 
