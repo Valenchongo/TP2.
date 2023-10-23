@@ -10,19 +10,14 @@ using namespace std;
 
 class Menu {
 private:
+
+    //Pre:
+    //Post: pregunta al usuario si quiere operar en el inventario o en el destino.
     static string  preguntar_accion();
-    /*
-    static string  preguntar_accion();
-
-    static void evaluar_acciones_destino(Destino &destino);
-
-    static string preguntar_accion_destino();
-
-    static Evento crear_evento();
-
-    static void definir_destino(Destino &destino);*/
 public:
 
+    //Pre:
+    //Post: Evalua la accion ingresada por el usuario.
     static void evaluar_accion();
 };
 
