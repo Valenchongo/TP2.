@@ -6,7 +6,6 @@
 #define LISTAS_TESTS_MENU_DES_HPP
 #include <string>
 #include <iostream>
-#include "Evento.hpp"
 #include "Destino.hpp"
 
 class Menu_des {

@@ -52,6 +52,8 @@ public:
     //Post: Mediante un archivo csv, carga todos los items en la lista del inventario.
     void cargar_archivo();
 
+    ~Inventario();
+
     void tamaño();
 };
 

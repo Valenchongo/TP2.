@@ -3,8 +3,8 @@
 #define LISTAS_TESTS_MENU_HPP
 #include <string>
 #include <iostream>
-#include "Evento.hpp"
-#include "Destino.hpp"
+#include "Menu_des.hpp"
+#include "Menu_inv.hpp"
 using namespace std;
 
 

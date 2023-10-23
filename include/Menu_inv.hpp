@@ -7,10 +7,8 @@
 
 #include <string>
 #include <iostream>
+#include "Inventario.hpp"
 #include "Item.hpp"
-#include "../include/Inventario.hpp"
-#include "../src/Inventario.cpp"
-
 using namespace std;
 
 class Menu_inv {
